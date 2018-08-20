@@ -47,12 +47,14 @@
 
   .mybox {
     background-color: rgb(205,205,205);
+    /*background-color: rgb(245,245,245);*/
     float: left;
     height: 100%;
     width: 84%;
   }
 
   .box_content {
+    height: 100%;
     padding: 15px;
   }
 </style>

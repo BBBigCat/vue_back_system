@@ -6,10 +6,13 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import Contents from './components/Contents.vue'
+import Contents from './components/Contents.vue';
+import Todo from './components/Todo.vue';
+
 
 const routes = [
-  {path: '/contents', component: Contents}
+  {path: '/contents', component: Contents},
+  {path: '/todo', component: Todo}
 ];
 
 const router = new VueRouter({

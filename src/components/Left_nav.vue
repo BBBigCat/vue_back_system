@@ -5,7 +5,7 @@
         <router-link to="/contents">栏目一</router-link>
       </li>
       <li>
-        <router-link to="/">栏目二</router-link>
+        <router-link to="/todo">栏目二</router-link>
       </li>
       <li>
         <router-link to="/">栏目三</router-link>
