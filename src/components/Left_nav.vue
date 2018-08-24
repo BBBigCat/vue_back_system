@@ -8,7 +8,7 @@
         <router-link to="/todo">栏目二</router-link>
       </li>
       <li>
-        <router-link to="/">栏目三</router-link>
+        <router-link to="/tree">栏目三</router-link>
       </li>
       <li>
         <router-link to="/">栏目四</router-link>

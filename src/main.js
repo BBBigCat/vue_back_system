@@ -8,11 +8,13 @@ Vue.use(VueRouter);
 
 import Contents from './components/Contents.vue';
 import Todo from './components/Todo.vue';
+import Tree from './components/Tree.vue';
 
 
 const routes = [
   {path: '/contents', component: Contents},
-  {path: '/todo', component: Todo}
+  {path: '/todo', component: Todo},
+  {path:'/tree',component:Tree}
 ];
 
 const router = new VueRouter({
