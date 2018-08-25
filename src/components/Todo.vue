@@ -15,36 +15,43 @@
           <li v-for="todo in filteredTodos"
               class="todo"
               :key="todo.id"
-              :class="{ completed: todo.completed, editing: todo == editedTodo }">
+              :class="{ completed: todo.completed, editing: todo === editedTodo }">
             <div class="view">
-              <input class="toggle" type="checkbox" v-model="todo.completed">
+              <input class="toggle" type="checkbox" v-model="todo.completed" placeholder=""/>
               <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
               <button class="destroy" @click="removeTodo(todo)"></button>
             </div>
             <input class="edit" type="text"
                    v-model="todo.title"
-                   v-todo-focus="todo == editedTodo"
+                   v-todo-focus="todo === editedTodo"
                    @blur="doneEdit(todo)"
                    @keyup.enter="doneEdit(todo)"
-                   @keyup.esc="cancelEdit(todo)">
+                   @keyup.esc="cancelEdit(todo)" placeholder=""/>
           </li>
         </ul>
       </section>
       <footer class="footer" v-show="todos.length" v-cloak>
     <span class="todo-count">
-      <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
+      <strong>{{ remaining }}</strong>
+      {{ remaining | pluralize('item') }} left
     </span>
         <!--<ul class="filters">-->
-          <!--<li>-->
-            <!--<a href="#/all" :class="{ selected: visibility == 'all' }">All</a>-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<a href="#/active" :class="{ selected: visibility == 'active' }">Active</a>-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a>-->
-          <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#/all" :class="{ selected: visibility == 'all' }">All</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#/active" :class="{ selected: visibility == 'active' }">Active</a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a>-->
+        <!--</li>-->
         <!--</ul>-->
+        <ul class="filters">
+          <li v-for="(val, key) in filters" :key="key">
+            <a :class="{ selected: visibility === key }" @click.prevent="visibility = key">{{ key | capitalize }}</a>
+          </li>
+        </ul>
+
         <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
           Clear completed
         </button>
@@ -54,6 +61,7 @@
       <p>Double-click to edit a todo</p>
       <p>Written by <a href="http://evanyou.me">Evan You</a></p>
       <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+      <p>Realization by <a>Me!!T_T</a></p>
     </footer>
   </div>
 </template>
@@ -75,20 +83,25 @@
   };
 
   // visibility filters
-  let filters = {
-    all: function (todos) {
-      return todos
-    },
-    active: function (todos) {
-      return todos.filter(function (todo) {
-        return !todo.completed
-      })
-    },
-    completed: function (todos) {
-      return todos.filter(function (todo) {
-        return todo.completed
-      })
-    }
+  // let filters = {
+  //   all: function (todos) {
+  //     return todos
+  //   },
+  //   active: function (todos) {
+  //     return todos.filter(function (todo) {
+  //       return !todo.completed
+  //     })
+  //   },
+  //   completed: function (todos) {
+  //     return todos.filter(function (todo) {
+  //       return todo.completed
+  //     })
+  //   }
+  // };
+  const filters = {
+    all: todos => todos,
+    active: todos => todos.filter(todo => !todo.completed),
+    completed: todos => todos.filter(todo => todo.completed)
   };
   export default {
     name: "todo",
@@ -96,6 +109,7 @@
       return {
         todos: todoStorage.fetch(),
         newTodo: '',
+        filters,
         editedTodo: null,
         visibility: 'all'
       }
@@ -108,7 +122,8 @@
         },
         deep: true
       }
-    }, computed: {
+    },
+    computed: {
       filteredTodos: function () {
         return filters[this.visibility](this.todos)
       },
@@ -116,19 +131,26 @@
         return filters.active(this.todos).length
       },
       allDone: {
-        get: function () {
-          return this.remaining === 0
-        },
-        set: function (value) {
-          this.todos.forEach(function (todo) {
-            todo.completed = value
-          })
-        }
+      get: function () {
+        return this.remaining === 0
+      },
+      set: function (value) {
+        this.todos.forEach(function (todo) {
+          todo.completed = value
+        })
       }
+      }
+      // allDone(value) {
+      //   this.todos.forEach(function (todo) {  // 报错Maximum call stack size exceeded，可能出现死循环
+      //     todo.completed = value
+      //   })
+      // }
     }, filters: {
-      pluralize: function (n) {
-        return n === 1 ? 'item' : 'items'
-      }
+      // pluralize: function (n) {
+      //   return n === 1 ? 'item' : 'items'
+      // }
+      pluralize: (n, b) => n === 1 ? b : b + 's',
+      capitalize: s => s.charAt(0).toUpperCase() + s.slice(1) //没有也可以，有了首字母大写
     }, methods: {
       addTodo: function () {
         let value = this.newTodo && this.newTodo.trim();
