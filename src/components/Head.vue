@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="head">
     <div>
       <ul>
         <li><span class="title">这是一个头部</span></li>
@@ -20,8 +20,11 @@
 </script>
 
 <style type="scss" scoped>
+  .head{
+    height: 10vh;
+  }
   ul{
-    height: 10%;
+    height: 10vh;
     min-height: 64px;
     line-height: 64px;
     color: white;

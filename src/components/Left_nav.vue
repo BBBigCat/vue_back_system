@@ -11,7 +11,7 @@
         <router-link to="/tree">栏目三</router-link>
       </li>
       <li>
-        <router-link to="/">栏目四</router-link>
+        <router-link to="/markdown">栏目四</router-link>
       </li>
     </ul>
   </div>
@@ -31,7 +31,7 @@
 <style type="scss" scoped>
   .left_nav {
     width: 16%;
-    height: 100%;
+    height: 90vh;
     min-height: 680px;
     float: left;
     background-color: rgb(57, 63, 71);
@@ -40,11 +40,12 @@
   ul {
     height: 100%;
   }
-
+  /*aitem-items:居中对齐弹性盒的各项元素：*/
   li {
+    display: flex;
+    align-items: center;
     height: 10%;
     padding-left: 20%;
-    line-height: 460%;
     font-size: 1.5rem;
     color: white;
   }

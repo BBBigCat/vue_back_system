@@ -9,12 +9,16 @@ Vue.use(VueRouter);
 import Contents from './components/Contents.vue';
 import Todo from './components/Todo.vue';
 import Tree from './components/Tree.vue';
+import Markdown from './components/Markdown.vue';
+
 
 
 const routes = [
   {path: '/contents', component: Contents},
   {path: '/todo', component: Todo},
-  {path:'/tree',component:Tree}
+  {path:'/tree',component:Tree},
+  {path:'/markdown',component:Markdown},
+
 ];
 
 const router = new VueRouter({

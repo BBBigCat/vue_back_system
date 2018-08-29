@@ -2,8 +2,8 @@
   <div id="app">
     <v-Head></v-Head>
     <v-Left></v-Left>
-    <div class="nav">
-    </div>
+    <!--<div class="nav">-->
+    <!--</div>-->
     <div class="mybox">
       <div class="box_content">
         <router-view></router-view>
@@ -46,15 +46,16 @@
   }
 
   .mybox {
+    height: 90vh;
+    width: 84%;
     background-color: rgb(205,205,205);
     /*background-color: rgb(245,245,245);*/
     float: left;
-    height: 100%;
-    width: 84%;
+    overflow-y: scroll;
   }
 
   .box_content {
-    height: 100%;
+    height: 90vh;
     padding: 15px;
   }
 </style>
