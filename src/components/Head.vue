@@ -21,12 +21,12 @@
 
 <style type="scss" scoped>
   .head{
-    height: 10vh;
+    height: 10%;
   }
   ul{
     height: 10vh;
     min-height: 64px;
-    line-height: 64px;
+    /*line-height: 64px;*/
     color: white;
     background-color: rgb(35,38,46);
     display: flex;
@@ -34,7 +34,8 @@
   }
   ul li{
     padding: 0 40px 0 40px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
   }
   .title{
     font-size: 3rem;
