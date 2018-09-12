@@ -38,12 +38,12 @@
     background-color: rgb(242, 242, 242);
   }
 
-  .nav {
-    float: left;
-    width: 84%;
-    min-height: 50px;
-    background-color: white;
-  }
+  /*.nav {*/
+    /*float: left;*/
+    /*width: 84%;*/
+    /*min-height: 50px;*/
+    /*background-color: white;*/
+  /*}*/
 
   .mybox {
     height: 90vh;
