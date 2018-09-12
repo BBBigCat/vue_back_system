@@ -18,7 +18,7 @@ const routes = [
   {path: '/todo', component: Todo},
   {path:'/tree',component:Tree},
   {path:'/markdown',component:Markdown},
-
+  {path: '/*', redirect: '/contents'}
 ];
 
 const router = new VueRouter({
