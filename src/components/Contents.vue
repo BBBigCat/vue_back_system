@@ -8,10 +8,10 @@
     </div>
     <div class="content_body">
       <h2>正在进行
-        <span></span>
+        <span>{{nodo}}</span>
       </h2>
       <ul>
-        <li v-for="todo in todos"  v-if="!todo.checked">
+        <li v-for="todo in todos" v-if="!todo.checked">
           <input type="checkbox" v-model="todo.checked" @change="saveList()"/>
           <em>{{todo.content}}</em>
           <span @click="removeList(todo)"><a href="#">X</a></span>
@@ -20,10 +20,10 @@
       <!--</div>-->
       <!--<div class="content_bottom">-->
       <h2>已完成
-        <span></span>
+        <span>{{done}}</span>
       </h2>
       <ul>
-        <li v-for="todo in todos"  v-if="todo.checked">
+        <li v-for="todo in todos" v-if="todo.checked">
           <input type="checkbox" v-model="todo.checked" @change="saveList()"/>
           <em>{{todo.content}}</em>
           <span @click="removeList(todo)"><a href="#">X</a></span>
@@ -41,6 +41,8 @@
     name: "contents",
     data() {
       return {
+        nodo: 0,
+        done: 0,
         todo: "",
         todos: storage.get(),
         // list: [{
@@ -61,7 +63,8 @@
     watch: {
       todos: {
         handler: function (todos) {
-         storage.save(todos)
+          storage.save(todos);
+
         },
         deep: true
       }
@@ -69,27 +72,51 @@
     methods: {
       saveList() {
         storage.save(this.todos);
+        this.countCheck();
       },
       removeList(todo) {
         // this.list.splice(key, 1);
         // storage.remove("list", this.list);
-        this.todos.splice(this.todos.indexOf(todo), 1)
+        this.todos.splice(this.todos.indexOf(todo), 1);
+        this.countCheck();
       },
       toadd() {
         let value = this.todo && this.todo.trim();
         if (!value) {
           return
         }
-          this.todos.push(
-            {
-              content: this.todo,
-              checked: false,
-            }
-          );
+        this.todos.push(
+          {
+            content: this.todo,
+            checked: false,
+          }
+        );
         this.todo = "";
         // storage.set("list", this.list);
+        this.countCheck();
+      },
+      countCheck() {
+        let num = 0;
+        let unum = 0;
+        for (let data of this.todos) {
+          if (data.checked) {
+            num += 1;
+            this.done = num;
+          } else
+          {
+              this.done = num;
+          }
+            if(!data.checked){
+            console.log(!data.checked);
+            unum +=1;
+            this.nodo = unum;
+          }else {
+              this.nodo = unum;
+            }
+        }
       }
     }, mounted() {
+      this.countCheck();
       // let list = storage.get("list");
       // if (list) {
       //   this.list = list;
