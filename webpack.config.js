@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -8,6 +9,11 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  plugins: [
+    // Vue-loader在15.*之后的版本都是 vue-loader的使用都是需要伴生 VueLoaderPlugin的,
+    // make sure to include the plugin for the magic
+    new VueLoaderPlugin()
+  ],
   module: {
     rules: [
       {
